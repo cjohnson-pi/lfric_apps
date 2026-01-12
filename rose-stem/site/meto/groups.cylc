@@ -60,6 +60,7 @@
     }) %}
 
 {% include "site/meto/groups/groups_adjoint.cylc" %}
+{% include "site/meto/groups/groups_adjoint_model.cylc" %}
 {% include "site/meto/groups/groups_adjoint_tests.cylc" %}
 {% include "site/meto/groups/groups_coupled_interface.cylc" %}
 {% include "site/meto/groups/groups_gravity_wave.cylc" %}

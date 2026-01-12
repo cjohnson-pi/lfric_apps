@@ -5,7 +5,8 @@
 {# ########################################################################### #}
 {% do LOG.debug("Entered site/meto/variables.cylc") %}
 
-{% do site_vars.update({"known_applications": ["gungho",
+{% do site_vars.update({"known_applications": ["adjoint_model",
+                                               "gungho",
                                                "gungho_model",
                                                "lfric_atm",
                                                "mesh",

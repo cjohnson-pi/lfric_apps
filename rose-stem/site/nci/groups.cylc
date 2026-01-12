@@ -46,6 +46,7 @@
     "gadi_integration_tests": [],
     }) %}
 
+{% include "site/nci/groups/groups_adjoint_model.cylc" %}
 {% include "site/nci/groups/groups_adjoint_tests.cylc" %}
 {% include "site/nci/groups/groups_gravity_wave.cylc" %}
 {% include "site/nci/groups/groups_gungho.cylc" %}

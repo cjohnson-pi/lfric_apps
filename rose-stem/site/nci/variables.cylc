@@ -1,6 +1,7 @@
 {% do LOG.debug("Entered site/nci/variables.cylc") %}
 
-{% do site_vars.update({"known_applications": ["adjoint_tests",
+{% do site_vars.update({"known_applications": ["adjoint_model",
+                                               "adjoint_tests",
                                                "gungho_model",
                                                "lfric_atm",
                                                "mesh",
