@@ -99,6 +99,29 @@ class tl_test_transport_control(TLTest):
         flag = "transport_control"
         super(tl_test_transport_control, self).__init__(flag)
 
+class tl_test_ffsl(TLTest):
+    '''
+    Test the ffsl transport
+    '''
+    def __init__(self):
+        flag = "ffsl"
+        super(tl_test_ffsl, self).__init__(flag)
+        
+class tl_test_ffsl_ls_u(TLTest):
+    '''
+    Test the ffsl transport
+    '''
+    def __init__(self):
+        flag = "ffsl_ls_u"
+        super(tl_test_ffsl_ls_u, self).__init__(flag)
+
+class tl_test_ffsl_ls_rho(TLTest):
+    '''
+    Test the ffsl transport
+    '''
+    def __init__(self):
+        flag = "ffsl_ls_rho"
+        super(tl_test_ffsl_ls_rho, self).__init__(flag)         
 
 class tl_test_timesteps(TLTest):
     '''
@@ -109,6 +132,9 @@ class tl_test_timesteps(TLTest):
         super(tl_test_timesteps, self).__init__(flag)
 
 if __name__ == '__main__':
+    TestEngine.run( tl_test_ffsl() )
+    TestEngine.run( tl_test_ffsl_ls_u() )
+    TestEngine.run( tl_test_ffsl_ls_rho() )
     TestEngine.run( tl_test_rhs_sample_eos() )
     TestEngine.run( tl_test_rhs_project_eos() )
     TestEngine.run(tl_test_transport_control())

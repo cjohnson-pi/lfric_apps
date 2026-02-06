@@ -30,7 +30,10 @@ program semi_implicit
                                      run_semi_imp_alg,            &
                                      run_rhs_sample_eos,          &
                                      run_rhs_project_eos,         &
-                                     run_rhs_alg
+                                     run_rhs_alg,                 &
+                                     run_ffsl,                    &
+                                     run_ffsl_ls_u,               &
+                                     run_ffsl_ls_rho
 
   implicit none
 
@@ -51,6 +54,9 @@ program semi_implicit
   ! Flags which determine the tests that will be carried out
   logical :: do_test_timesteps = .false.
   logical :: do_test_transport_control = .false.
+  logical :: do_test_ffsl = .false.
+  logical :: do_test_ffsl_ls_u = .false.
+  logical :: do_test_ffsl_ls_rho = .false.
   logical :: do_test_semi_imp_alg = .false.
   logical :: do_test_rhs_alg = .false.
   logical :: do_test_rhs_project_eos = .false.
@@ -97,6 +103,9 @@ program semi_implicit
           " test_XXX with XXX in { "   // &
           " timesteps, "               // &
           " transport_control, "       // &
+          " ffsl, "                    // &         
+          " ffsl_ls_u, "               // &
+          " ffsl_ls_rho, "             // & 
           " semi_imp_alg, "            // &
           " rhs_alg, "                 // &
           " rhs_project_eos, "         // &
@@ -120,6 +129,12 @@ program semi_implicit
      do_test_timesteps = .true.
   case ("test_transport_control")
      do_test_transport_control = .true.
+  case ("test_ffsl")
+     do_test_ffsl = .true. 
+  case ("test_ffsl_ls_u")
+     do_test_ffsl_ls_u = .true.
+  case ("test_ffsl_ls_rho")
+     do_test_ffsl_ls_rho = .true.  
   case ("test_semi_imp_alg")
      do_test_semi_imp_alg = .true.
   case ("test_rhs_alg")
@@ -140,6 +155,15 @@ program semi_implicit
   call init_time( modeldb )
   call initialise( application_name, modeldb,  modeldb%calendar )
 
+  if (do_test_ffsl) then
+    call run_ffsl(modeldb)
+  endif
+  if (do_test_ffsl_ls_u) then
+    call run_ffsl_ls_u(modeldb)
+  endif
+  if (do_test_ffsl_ls_rho) then
+    call run_ffsl_ls_rho(modeldb)
+  endif
   if (do_test_timesteps) then
     call run_timesteps(modeldb)
   endif

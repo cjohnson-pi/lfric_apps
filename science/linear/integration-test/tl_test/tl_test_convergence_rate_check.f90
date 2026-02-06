@@ -14,7 +14,8 @@ module tl_test_convergence_rate_check
   implicit none
 
   private
-  public convergence_rate_check
+  public convergence_rate_check, &
+         linear_check
 
   contains
 
@@ -66,5 +67,44 @@ module tl_test_convergence_rate_check
     call log_event( log_scratch_space, LOG_LEVEL_INFO )
 
   end subroutine convergence_rate_check
+
+  !> @brief   Check if the algorithm is linear
+  !> @details A function L(x) is linear if
+  !!          || L(x + gamma x') - L(x) - gamma L(x') || < tol
+  !!          where tol is the machine precision
+  !> @param[in] norm_diff       Norm at first iteration
+  !> @param[in] norm_diff_prev  Norm at second iteration
+  !> @param[in] label           Name of the code being tested
+  !> @param[in] tol             Tolerance value
+  subroutine linear_check( norm_diff, norm_diff_prev, label, tol )
+
+    implicit none
+
+    real(r_def),           intent(in) :: norm_diff, norm_diff_prev
+    character(str_def),    intent(in) :: label
+    real(r_def), optional, intent(in) :: tol
+    real(r_def) :: tolerance
+    character(len=4) :: pass_str
+
+    if ( present(tol) ) then
+      tolerance = tol
+    else
+      tolerance = 1.0E-8_r_def
+    end if
+
+    write( log_scratch_space, '(A)' ) &
+           "TL Test: " // trim(label)
+    call log_event( log_scratch_space, LOG_LEVEL_INFO )
+
+    if (( norm_diff < tolerance ) .or. ( norm_diff_prev < tolerance )) then
+      pass_str = "PASS"
+    else
+      pass_str = "FAIL"
+    end if
+
+    write(log_scratch_space,'("   test",A32," : ",A4)') trim(label), pass_str
+    call log_event( log_scratch_space, LOG_LEVEL_INFO )
+
+  end subroutine linear_check
 
 end module tl_test_convergence_rate_check

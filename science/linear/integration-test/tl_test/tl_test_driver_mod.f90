@@ -48,6 +48,9 @@ module tl_test_driver_mod
   use tl_test_rhs_alg_mod,                 only : test_rhs_alg
   use tl_test_semi_imp_alg_mod,            only : test_semi_imp_alg
   use tl_test_timesteps_alg_mod,           only : test_timesteps
+  use tl_test_ffsl_ls_u_alg_mod,           only : test_ffsl_ls_u
+  use tl_test_ffsl_ls_rho_alg_mod,         only : test_ffsl_ls_rho
+  use tl_test_ffsl_alg_mod,                only : test_ffsl
 
   implicit none
 
@@ -68,7 +71,10 @@ module tl_test_driver_mod
          run_rhs_project_eos,         &
          run_rhs_sample_eos,          &
          run_semi_imp_alg,            &
-         run_transport_control
+         run_transport_control,       &
+         run_ffsl,                    &
+         run_ffsl_ls_u,               &
+         run_ffsl_ls_rho
 
   type(mesh_type), pointer :: mesh              => null()
   type(mesh_type), pointer :: twod_mesh         => null()
@@ -324,6 +330,51 @@ contains
                                  twod_mesh )
 
   end subroutine run_transport_control
+
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  !>@brief Tests the tangent linear model ffsl transport routine
+  !>@param [in,out] modeldb   The structure that holds model state
+  subroutine run_ffsl(modeldb)
+
+    implicit none
+
+    type(modeldb_type), intent(inout) :: modeldb
+
+    call test_ffsl( modeldb, &
+                    mesh,    &
+                    twod_mesh )
+
+  end subroutine run_ffsl
+
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  !>@brief Tests the tangent linear model ffsl transport routine
+  !>@param [in,out] modeldb   The structure that holds model state
+  subroutine run_ffsl_ls_u(modeldb)
+
+    implicit none
+
+    type(modeldb_type), intent(inout) :: modeldb
+
+    call test_ffsl_ls_u( modeldb, &
+                    mesh,    &
+                    twod_mesh )
+
+  end subroutine run_ffsl_ls_u
+
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  !>@brief Tests the tangent linear model ffsl transport routine
+  !>@param [in,out] modeldb   The structure that holds model state
+  subroutine run_ffsl_ls_rho(modeldb)
+
+    implicit none
+
+    type(modeldb_type), intent(inout) :: modeldb
+
+    call test_ffsl_ls_rho( modeldb, &
+                    mesh,    &
+                    twod_mesh )
+
+  end subroutine run_ffsl_ls_rho
 
   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   !>@brief Tests the tangent linear model for semi-implicit timestepping
