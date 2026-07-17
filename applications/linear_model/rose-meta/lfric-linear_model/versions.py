@@ -31,3 +31,33 @@ class vnXX_txxx(MacroUpgrade):
         # Add settings
         return config, self.reports
 """
+
+
+class vn32_t386(MacroUpgrade):
+    """Upgrade macro for ticket #386 by Christine Johnson."""
+
+    BEFORE_TAG = "vn3.2"
+    AFTER_TAG = "vn3.2_t386"
+
+    def upgrade(self, config, meta_config=None):
+        # Commands From: rose-meta/lfric-driver
+        topology = self.get_setting_value(
+            config, ["namelist:base_mesh", "topology"]
+        )
+        partitioner = self.get_setting_value(
+            config, ["namelist:partitioning", "partitioner"]
+        )
+        if topology == "'non_periodic'" or partitioner == "'planar'":
+            self.change_setting_value(
+                config,
+                ["namelist:base_mesh", "prime_mesh_name"],
+                "'l0_planar'",
+            )
+        else:
+            self.change_setting_value(
+                config,
+                ["namelist:base_mesh", "prime_mesh_name"],
+                "'l0_cubedsphere'",
+            )
+
+        return config, self.reports
