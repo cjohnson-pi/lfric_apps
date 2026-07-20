@@ -20,13 +20,10 @@ class UpgradeError(Exception):
 
 """
 Copy this template and complete to add your macro
-
 class vnXX_txxx(MacroUpgrade):
     # Upgrade macro for <TICKET> by <Author>
-
     BEFORE_TAG = "vnX.X"
     AFTER_TAG = "vnX.X_txxx"
-
     def upgrade(self, config, meta_config=None):
         # Add settings
         return config, self.reports
@@ -60,7 +57,8 @@ class vn32_t386(MacroUpgrade):
                 "'l0_cubedsphere'",
             )
         return config, self.reports
-    
+
+
 class vn32_t551(MacroUpgrade):
     """Upgrade macro for ticket #551 by Christine Johnson."""
 
@@ -192,15 +190,15 @@ class vn32_t551(MacroUpgrade):
                     forced=True,
                 )
         if source_mesh_name == "'C12'":
-                self.add_setting(
-                    config,
-                    ["namelist:lfric2lfric", "source_mesh_name"],
-                    "'l1_cubedsphere",
-                    forced=True,
-                )
-
+            self.add_setting(
+                config,
+                ["namelist:lfric2lfric", "source_mesh_name"],
+                "'l1_cubedsphere",
+                forced=True,
+            )
         aerosol_mesh_name = self.get_setting_value(
-            config, ["namelist:multires_coupling", "aerosol_mesh_name"])        
+            config, ["namelist:multires_coupling", "aerosol_mesh_name"]
+        )
         if aerosol_mesh_name == "'multigrid_l2'":
             self.add_setting(
                 config,
@@ -209,7 +207,9 @@ class vn32_t551(MacroUpgrade):
                 forced=True,
             )
         multires_coupling_mesh_tags = self.get_setting_value(
-            config, ["namelist:multires_coupling", "multires_coupling_mesh_tags"])        
+            config,
+            ["namelist:multires_coupling", "multires_coupling_mesh_tags"],
+        )
         if multires_coupling_mesh_tags == "'dynamics','multigrid_l2'":
             self.add_setting(
                 config,
@@ -218,7 +218,8 @@ class vn32_t551(MacroUpgrade):
                 forced=True,
             )
         orography_mesh_name = self.get_setting_value(
-            config, ["namelist:multires_coupling", "orography_mesh_name"])        
+            config, ["namelist:multires_coupling", "orography_mesh_name"]
+        )
         if orography_mesh_name == "'dynamics'":
             self.add_setting(
                 config,
@@ -226,10 +227,9 @@ class vn32_t551(MacroUpgrade):
                 "'l0_cubedsphere",
                 forced=True,
             )
-            
         physics_mesh_name = self.get_setting_value(
-            config, ["namelist:multires_coupling", "physics_mesh_name"])
-                        
+            config, ["namelist:multires_coupling", "physics_mesh_name"]
+        )
         if physics_mesh_name == "'dynamics'":
             self.add_setting(
                 config,
@@ -237,10 +237,9 @@ class vn32_t551(MacroUpgrade):
                 "'l0_cubedsphere",
                 forced=True,
             )
-
         blpert_mesh_name = self.get_setting_value(
-            config, ["namelist:stochastic_physics", "blpert_mesh_name"])
-
+            config, ["namelist:stochastic_physics", "blpert_mesh_name"]
+        )
         if blpert_mesh_name == "'multigrid_l3'":
             self.add_setting(
                 config,
