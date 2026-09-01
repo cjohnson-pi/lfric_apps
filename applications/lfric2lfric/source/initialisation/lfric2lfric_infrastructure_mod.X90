@@ -303,17 +303,17 @@ contains
 
     if ( horizontal_change ) then
       call log_event("Horizontal interpolation logical set to TRUE", &
-           log_level_info)
+           log_level_debug)
     else
       call log_event("Horizontal interpolation logical set to FALSE", &
-                      log_level_info)
+                      log_level_debug)
     end if
     if ( vertical_change ) then
       call log_event("Vertical interpolation logical set to TRUE", &
-           log_level_info)
+           log_level_debug)
     else
       call log_event("Vertical interpolation logical set to FALSE", &
-           log_level_info)
+           log_level_debug)
     end if
     !=======================================================================
     ! Mesh
