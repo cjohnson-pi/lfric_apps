@@ -8,7 +8,7 @@
 module lfric2lfric_driver_mod
 
   use constants_mod,            only: str_def, str_max_filename, &
-                                      i_def, r_def, l_def, r_second
+                                      i_def, l_def, r_second
   use driver_fem_mod,           only: final_fem
   use driver_io_mod,            only: final_io
   use driver_modeldb_mod,       only: modeldb_type
