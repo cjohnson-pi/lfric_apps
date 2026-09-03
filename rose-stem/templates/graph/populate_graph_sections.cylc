@@ -207,6 +207,7 @@
                     {% do mesh_dict.update({"mesh_yproc": task_values["yproc"]}) %}
                 {% endif %}
                 {% do tasks_to_run.update({mesh_run_task: mesh_dict}) %}
+            {% endif %}
 
 {# Add the mesh to the graph, so all meshes are triggered by build #}
             {% do graph_sections.append([
