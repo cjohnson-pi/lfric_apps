@@ -68,8 +68,11 @@
     {% endif %}
 
     {% do graph_sections.append([
-            mesh_run_weights_platform, generate_weights_task
-            ]) %}
+        mesh_build_weights_platform, mesh_run_weights_platform
+        ]) %}
+    {% do graph_sections.append([
+        mesh_run_weights_platform, generate_weights_task
+        ]) %}
 {% endfor %}
 
 {% do graph_sections.append([
