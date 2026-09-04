@@ -148,7 +148,7 @@
 
     {% do task_dict.update({
         "opt_confs": ["clim_gal9_ral_seuk","oasis","src_L70_80km","dst_L38_40km"],
-        "resolution": "C12_C16_lam",
+        "resolution": ["C24_C12", "seuk_MG"],
         "dst_mesh": "seuk_MG",
         "dst_name": "dynamics",
         "dst_type": "regional",
