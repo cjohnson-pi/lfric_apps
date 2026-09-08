@@ -5,25 +5,8 @@
 {# ########################################################################### #}
 {% do LOG.debug("Entered site/common/lfric2lfric/tasks_lfric2lfric.cylc") %}
 
-<<<<<<< HEAD
+
 {% if task_ns.conf_name == "map_seuk_fine_to_coarse_ral" %}
-=======
-{% if task_ns.conf_name == "ral_seuk-C32_lam_MG_1cpu" %}
-
-    {% do task_dict.update({
-        "opt_confs": ["src_seuk_L70","dst_seuk-coarse"],
-        "resolution": "seuk_MG",
-        "dst_mesh": "",
-        "dst_name": "",
-        "dst_type": "",
-        "src_mesh": "",
-        "src_name": "",
-        "src_type": "",
-        "xios_min_buffer_size": 2097152,
-    }) %}
-
-{% elif task_ns.conf_name == "ral_seuk-C32_lam_MG_4cpu" %}
->>>>>>> upstream/main
 
     {% do task_dict.update({
         "opt_confs": ["src_seuk_L70","dst_seuk-coarse"],
