@@ -3,12 +3,30 @@
 {# The file LICENCE, distributed with this code, contains details of the terms #}
 {# under which the code may be used. #}
 {# ########################################################################### #}
-{% do LOG.debug("Entered site/common/lfric2lfric/tasks_solver.cylc") %}
+{% do LOG.debug("Entered site/common/lfric2lfric/tasks_lfric2lfric.cylc") %}
 
+<<<<<<< HEAD
 {% if task_ns.conf_name == "map_seuk_fine_to_coarse_ral" %}
+=======
+{% if task_ns.conf_name == "ral_seuk-C32_lam_MG_1cpu" %}
 
     {% do task_dict.update({
-        "opt_confs": ["ral_seuk"],
+        "opt_confs": ["src_seuk_L70","dst_seuk-coarse"],
+        "resolution": "seuk_MG",
+        "dst_mesh": "",
+        "dst_name": "",
+        "dst_type": "",
+        "src_mesh": "",
+        "src_name": "",
+        "src_type": "",
+        "xios_min_buffer_size": 2097152,
+    }) %}
+
+{% elif task_ns.conf_name == "ral_seuk-C32_lam_MG_4cpu" %}
+>>>>>>> upstream/main
+
+    {% do task_dict.update({
+        "opt_confs": ["src_seuk_L70","dst_seuk-coarse"],
         "resolution": "seuk_MG",
         "dst_mesh": "",
         "dst_name": "",
@@ -17,12 +35,13 @@
         "src_name": "",
         "src_type": "",
         "mpi_parts": 4,
+        "xios_min_buffer_size": 2097152,
     }) %}
 
 {% elif task_ns.conf_name == "oasis_seuk_fine_to_coarse_ral" %}
 
     {% do task_dict.update({
-        "opt_confs": ["ral_seuk","oasis"],
+        "opt_confs": ["oasis","src_seuk_L70","dst_seuk-coarse"],
         "resolution": "seuk_MG",
         "dst_mesh": "seuk_MG",
         "dst_name": "multigrid_l1",
@@ -31,12 +50,13 @@
         "src_name": "dynamics",
         "src_type": "regional",
         "mpi_parts": 4,
+        "xios_min_buffer_size": 2097152,
     }) %}
 
 {% elif task_ns.conf_name == "map_seuk_coarse_to_fine_ral3" %}
 
     {% do task_dict.update({
-        "opt_confs": ["ral3"],
+        "opt_confs": ["ral3","ral3_seuk"],
         "resolution": "ral3_seuk",
         "dst_mesh": "",
         "dst_name": "",
@@ -44,12 +64,13 @@
         "src_mesh": "",
         "src_name": "",
         "src_type": "",
+        "xios_min_buffer_size": 2097152,
     }) %}
 
 {% elif task_ns.conf_name == "map_C24_to_C12" %}
 
     {% do task_dict.update({
-        "opt_confs": ["clim_gal9"],
+        "opt_confs": ["src_C12_L70","dst_C24"],
         "resolution": "C24_C12",
         "dst_mesh": "",
         "dst_name": "",
@@ -62,7 +83,7 @@
 {% elif task_ns.conf_name == "oasis_C24_to_C12" %}
 
     {% do task_dict.update({
-        "opt_confs": ["clim_gal9","oasis"],
+        "opt_confs": ["oasis","src_C12_L70","dst_C24"],
         "resolution": "C24_C12",
         "dst_mesh": "C24_C12",
         "dst_name": "C24",
@@ -76,21 +97,22 @@
 {% elif task_ns.conf_name == "oasis_C12_to_seuk_1cpu" %}
 
     {% do task_dict.update({
-        "opt_confs": ["clim_gal9_ral_seuk","oasis"],
-        "resolution": "C12_C16_lam",
+        "opt_confs": ["oasis","src_C12_L70","dst_seuk"],
+        "resolution": ["C24_C12", "seuk_MG"],
         "dst_mesh": "seuk_MG",
         "dst_name": "dynamics",
         "dst_type": "regional",
         "src_mesh": "C24_C12",
         "src_name": "C12",
         "src_type": "global",
+        "xios_min_buffer_size": 2097152,
     }) %}
 
 {% elif task_ns.conf_name == "oasis_C12_to_seuk" %}
 
     {% do task_dict.update({
-        "opt_confs": ["clim_gal9_ral_seuk","oasis", "multi-cpu"],
-        "resolution": "C12_C16_lam",
+        "opt_confs": [ "oasis","src_C12_L70","dst_seuk","multi-cpu"],
+        "resolution": ["C24_C12", "seuk_MG"],
         "dst_mesh": "seuk_MG",
         "dst_name": "dynamics",
         "dst_type": "regional",
@@ -98,13 +120,14 @@
         "src_name": "C12",
         "src_type": "global",
         "mpi_parts": 4,
+        "xios_min_buffer_size": 2097152,
     }) %}
 
 {% elif task_ns.conf_name == "oasis_C12_to_seuk-lbc" %}
 
     {% do task_dict.update({
-        "opt_confs": ["clim_gal9_ral_seuk","oasis","lbc", "multi-cpu"],
-        "resolution": "C12_C16_lam",
+        "opt_confs": ["oasis","src_C12_L70","dst_seuk","lbc","multi-cpu"],
+        "resolution": ["C24_C12", "seuk_MG"],
         "dst_mesh": "seuk_MG",
         "dst_name": "dynamics-lbc",
         "dst_type": "regional",
@@ -112,6 +135,7 @@
         "src_name": "C12",
         "src_type": "global",
         "mpi_parts": 4,
+        "xios_min_buffer_size": 2097152,
     }) %}
 
 {% elif task_ns.conf_name == "canned" %}
@@ -136,7 +160,7 @@
 
 {% endif %}
 
-{# Set default values for Solver tasks #}
+{# Set default values for Lfric2lfric tasks #}
 {% if task_dict %}
     {% do task_dict.update({"application_dir": "lfric_apps/applications/lfric2lfric"}) %}
     {% if "app_name" not in task_dict %}
@@ -147,4 +171,4 @@
     {% endif %}
 {% endif %}
 
-{% do LOG.debug("Finished in site/common/lfric2lfric/tasks_solver.cylc") %}
+{% do LOG.debug("Finished in site/common/lfric2lfric/tasks_lfric2lfric.cylc") %}
