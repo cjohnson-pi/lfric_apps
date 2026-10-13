@@ -104,6 +104,7 @@
         "ancil_resolution": "C12",
         "DT": 1800,
         "tsteps": 13,
+        "log_level": "debug",
         "mpi_parts": 6,
     }) %}
 
@@ -116,6 +117,7 @@
         "ancil_resolution": "C12",
         "DT": 1800,
         "tsteps": 13,
+        "log_level": "debug",
         "mpi_parts": 1,
     }) %}
 
@@ -129,6 +131,7 @@
         "DT": 1800,
         "tsteps": 13,
         "mpi_parts": 6,
+        "log_level": "debug",
         "threads": 4,
     }) %}
 
@@ -142,6 +145,7 @@
         "DT": 1800,
         "tsteps": 13,
         "mpi_parts": 6,
+        "log_level": "debug",
         "threads": 4,
     }) %}
 
@@ -155,6 +159,7 @@
         "DT": 1800,
         "tsteps": 13,
         "mpi_parts": 1,
+        "log_level": "debug",
         "threads": 4,
     }) %}
 
@@ -167,6 +172,7 @@
         "ancil_resolution": "C12",
         "DT": 1800,
         "tsteps": 13,
+        "log_level": "debug",
         "mpi_parts": 6,
     }) %}
 
@@ -179,6 +185,7 @@
         "ancil_resolution": "C12",
         "DT": 1800,
         "tsteps": 13,
+        "log_level": "debug",
         "mpi_parts": 1,
     }) %}
 
@@ -192,6 +199,7 @@
         "DT": 1800,
         "tsteps": 13,
         "mpi_parts": 6,
+        "log_level": "debug",
         "threads": 4,
     }) %}
 
@@ -205,6 +213,7 @@
         "DT": 1800,
         "tsteps": 13,
         "mpi_parts": 1,
+        "log_level": "debug",
         "threads": 4,
     }) %}
 
@@ -216,6 +225,7 @@
         "ancil_resolution": "C12",
         "DT": 1800,
         "tsteps": 13,
+        "log_level": "debug",
         "mpi_parts": 6,
     }) %}
 
@@ -227,6 +237,7 @@
         "ancil_resolution": "C12",
         "DT": 1800,
         "tsteps": 13,
+        "log_level": "debug",
         "mpi_parts": 6,
     }) %}
 
@@ -240,6 +251,7 @@
         "DT": 1800,
         "tsteps": 13,
         "mpi_parts": 6,
+        "log_level": "debug",
         "threads": 4,
     }) %}
 
@@ -253,6 +265,7 @@
         "DT": 1800,
         "tsteps": 13,
         "mpi_parts": 1176,
+        "log_level": "debug",
         "threads": 4,
     }) %}
 
@@ -266,6 +279,7 @@
         "DT": 1800,
         "tsteps": 13,
         "mpi_parts": 1176,
+        "log_level": "debug",
         "threads": 4,
     }) %}
 
@@ -279,6 +293,7 @@
         "DT": 1800,
         "tsteps": 13,
         "mpi_parts": 1176,
+        "log_level": "debug",
         "threads": 4,
     }) %}
 

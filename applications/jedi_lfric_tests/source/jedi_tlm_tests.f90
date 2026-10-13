@@ -60,6 +60,7 @@ program jedi_tlm_tests
   type( jedi_state_type )               :: state
   type( jedi_increment_type )           :: inc
   type( jedi_increment_type )           :: inc_initial
+  type( jedi_increment_type )           :: inc_final
   type( jedi_pseudo_model_type )        :: pseudo_model
   type( jedi_linear_model_type )        :: linear_model
   type( jedi_run_type )                 :: run
@@ -144,6 +145,11 @@ program jedi_tlm_tests
   ! Propagate via TL model
   call linear_model%forecastTL( inc, forecast_length )
 
+ ! Create inc_final via copy constructor using inc
+  call inc_final%initialise( inc )
+
+  call linear_model%forecastAD( inc, forecast_length )
+
   ! Check the norm is not zero
   if (inc%norm() <= 0.0_r_def) then
     call log_event("inc norm not > 0.0", LOG_LEVEL_ERROR)
@@ -153,14 +159,14 @@ program jedi_tlm_tests
   dot_product_1 = real(inc%scaled_dot_product_with_itself(), r_def)
 
   ! Propagate via AD model
-  call linear_model%forecastAD( inc, forecast_length )
+  call linear_model%forecastTL( inc, forecast_length )
   ! Check the norm is not zero
   if (inc%norm() <= 0.0_r_def) then
     call log_event("inc norm not > 0.0", LOG_LEVEL_ERROR)
   end if
 
   ! Compute <AMx,x>
-  dot_product_2 = real(inc%dot_product_with(inc_initial), r_def)
+  dot_product_2 = real(inc%dot_product_with(inc_final), r_def)
 
   ! The two dot products should be nearly identical. The tolerance is included
   ! due to differences in order of operations and solver non-convergence.
